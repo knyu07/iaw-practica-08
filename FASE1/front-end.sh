@@ -6,7 +6,7 @@ DB_NAME=wordpress_db
 DB_USER=wordpress_user
 DB_PASSWORD=wordpress_password
 IP_PRIVADA_FRONTEND=
-IP_MYSQL_SERVER=
+IP_PRIVADA_MYSQL_SERVER=
 
 #Actualizamos
 apt update
@@ -40,7 +40,7 @@ mv wp-config-sample.php wp-config.php
 sed -i "s/database_name_here/$DB_NAME/" wp-config.php
 sed -i "s/username_here/$DB_USER/" wp-config.php
 sed -i "s/password_here/$DB_PASSWORD/" wp-config.php
-sed -i "s/localhost/$IP_MYSQL_SERVER/" wp-config.php
+sed -i "s/localhost/$IP_PRIVADA_MYSQL_SERVER/" wp-config.php
 
 #Habilitamos las variables WP_SITEURL y WP_HOME
 sed -i /DB_COLLATE/a define('WP_SITEURL'), 'http://$IP_PUBLICA_FRONTEND/wordpress');" /var/www/html/wordpress/wp_config.php
