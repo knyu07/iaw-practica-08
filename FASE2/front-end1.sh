@@ -60,7 +60,7 @@ sed -i "s#wp-blog-header.php#wordpress/wp-blog-header.php#" /var/www/html/index.
 a2enmod rewrite
 
 #Copiamos el archivo htaccess a /var/www/html
-cp /home/ubuntu/iaw-practica-8/FASE2/htaccess /var/www/html/.htaccess
+mv /home/ubuntu/iaw-practica-8/FASE2/htaccess /var/www/html/.htaccess
 
 #Copiamos el archivo de configuración de Apache
 cp /home/ubuntu/iaw-practica-08/FASE2/000-default.conf /etc/apache2/sites-available
