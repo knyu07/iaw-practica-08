@@ -7,7 +7,7 @@ DB_USER=wordpress_user
 DB_PASSWORD=wordpress_password
 IP_PRIVADA_FRONTEND=localhost
 IP_PRIVADA_MYSQL_SERVER=localhost
-IP_MÁQUINA=
+IP_MAQUINA=
 
 #Actualizamos
 apt update
@@ -54,8 +54,8 @@ sed -i "s/password_here/$DB_PASSWORD/" wp-config.php
 sed -i "s/localhost/$IP_PRIVADA_MYSQL_SERVER/" wp-config.php
 
 #Habilitamos las variables WP_SITEURL y WP_HOME
-sed -i "/DB_COLLATE/a define('WP_SITEURL'), 'http://$IP_MÁQUINA/wordpress');" /var/www/html/wordpress/wp-config.php
-sed -i "/WP_SITEURL/a define('WP_HOME'), 'http://$IP_MÁQUINA');" /var/www/html/wordpress/wp-config.php
+sed -i "/DB_COLLATE/a define('WP_SITEURL'), 'http://$IP_MAQUINA/wordpress');" /var/www/html/wordpress/wp-config.php
+sed -i "/WP_SITEURL/a define('WP_HOME'), 'http://$IP_MAQUINA');" /var/www/html/wordpress/wp-config.php
 
 #Copiar el archivo wordpress /index.php a /var/www/html
 
