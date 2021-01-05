@@ -65,7 +65,7 @@ mv /htaccess /var/www/html/.htaccess
 
 #Copiamos el archivo de configuración de Apache
 cd iaw-practica-8/FASE2
-cp /000-default.conf /etc/apache2/sites-available
+cp /000-default.conf /etc/apache2/sites-available/000-default.conf
 
 #Reiniciamos Apache
 systemctl restart apache2 
