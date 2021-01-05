@@ -19,7 +19,7 @@ apt install apache2 -y
 apt install php libapache2-mod-php php-mysql -y
 
 #Copiamos el archivo info.php a /var/www/html
-cp /home/ubuntu/info.php /var/www/html
+sudo cp /home/ubuntu/info.php /var/www/html
 
 #Reiniciamos el servicio de Apache
 systemctl restart apache2
@@ -61,11 +61,11 @@ a2enmod rewrite
 
 #Copiamos el archivo htaccess a /var/www/html
 cd iaw-practica-8/FASE2
-mv /htaccess /var/www/html/.htaccess
+sudo cp htaccess /var/www/html/.htaccess
 
 #Copiamos el archivo de configuración de Apache
 cd iaw-practica-8/FASE2
-cp /000-default.conf /etc/apache2/sites-available/000-default.conf
+sudo cp 000-default.conf /etc/apache2/sites-available/000-default.conf
 
 #Reiniciamos Apache
 systemctl restart apache2 
