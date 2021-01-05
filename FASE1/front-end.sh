@@ -82,7 +82,7 @@ sed -i "/NONCE_SALT/d" /var/www/html/wordpress/wp-config.php
 SECURITY_KEYS=$(curl https://api.wordpress.org/secret-key/1.1/salt/)
 
 #Reemplaza el carácter / por el carácter _
-SECURITY_KEYS=$(echo $SECURITY_KEY | tr / _)
+SECURITY_KEYS=$(echo $SECURITY_KEYS | tr / _)
 
 #Añadimos los security keys al archivo
 sed -i "/@-/a $SECURITY_KEYS" /var/www/html/wordpress/wp-config.php
