@@ -5,7 +5,7 @@ set -x
 DB_NAME=wordpress_db
 DB_USER=wordpress_user
 DB_PASSWORD=wordpress_password
-IP_PRIVADA_FRONTEND="%"
+IP_PRIVADA_FRONTEND=
 IP_PRIVADA_BACK=
 
 #Actualizamos
