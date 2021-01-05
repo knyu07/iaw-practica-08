@@ -49,7 +49,7 @@ sed -i "/WP_SITEURL/a define('WP_HOME', 'http://$IP_PUBLICA_FRONTEND');" /var/ww
 
 #Copiar el archivo wordpress /index.php a /var/www/html
 
-cp /var/www/html/wordpress/index.php /var/www/html
+sudo cp /var/www/html/wordpress/index.php /var/www/html
 
 #Editamos el archivo wordpress /index.php
 
@@ -61,11 +61,11 @@ a2enmod rewrite
 
 #Copiamos el archivo htaccess a /var/www/html
 cd iaw-practica-8/FASE1
-mv /htaccess /var/www/html/.htaccess
+sudo cp htaccess /var/www/html/.htaccess
 
 #Copiamos el archivo de configuración de Apache
 cd iaw-practica-8/FASE1
-cp /000-default.conf /etc/apache2/sites-available/000-default.conf
+sudo cp 000-default.conf /etc/apache2/sites-available/000-default.conf
 
 #Reiniciamos Apache
 systemctl restart apache2 
