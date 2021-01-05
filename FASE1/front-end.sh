@@ -43,8 +43,8 @@ sed -i "s/password_here/$DB_PASSWORD/" wp-config.php
 sed -i "s/localhost/$IP_PRIVADA_MYSQL_SERVER/" wp-config.php
 
 #Habilitamos las variables WP_SITEURL y WP_HOME
-sed -i /DB_COLLATE/a define('WP_SITEURL', 'http://$IP_PRIVADA_FRONTEND/wordpress');" /var/www/html/wordpress/wp-config.php
-sed -i /WP_SITEURL/a define('WP_HOME', 'http://$IP_PRIVADA_FRONTEND');" /var/www/html/wordpress/wp-config.php
+sed -i "/DB_COLLATE/a define('WP_SITEURL', 'http://$IP_PRIVADA_FRONTEND/wordpress');" /var/www/html/wordpress/wp-config.php
+sed -i "/WP_SITEURL/a define('WP_HOME', 'http://$IP_PRIVADA_FRONTEND');" /var/www/html/wordpress/wp-config.php
 
 #Copiar el archivo wordpress /index.php a /var/www/html
 
