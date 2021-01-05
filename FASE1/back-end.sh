@@ -22,7 +22,7 @@ mysql -u root <<< "GRANT ALL PRIVILEGES ON $DB_NAME.* TO $DB_USER@'$IP_PRIVADA_F
 mysql -u root <<< "FLUSH PRIVILEGES;"
 
 # Modificamos el valor de bind-address para permitir conexiones remotas
-sed -i "s/127.0.0.1/$IP_PRIVADA_BACK/" /etc/mysql/mysqld.conf.d/mysqld.conf
+sed -i "s/127.0.0.1/$IP_PRIVADA_BACK/" /etc/mysql/mysql.conf.d/mysqld.cnf
 
 # Reiniciamos mysql
 systemctl restart mysql
