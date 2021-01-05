@@ -44,8 +44,8 @@ sed -i "s/password_here/$DB_PASSWORD/" wp-config.php
 sed -i "s/localhost/$IP_PRIVADA_MYSQL_SERVER/" wp-config.php
 
 #Habilitamos las variables WP_SITEURL y WP_HOME
-sed -i /DB_COLLATE/a define('WP_SITEURL', 'http://$IP_PUBLICA_BALANCEADOR/wordpress');" /var/www/html/wordpress/wp-config.php
-sed -i /WP_SITEURL/a define('WP_HOME', 'http://$IP_PUBLICA_BALANCEADOR');" /var/www/html/wordpress/wp-config.php
+sed -i "/DB_COLLATE/a define('WP_SITEURL', 'http://$IP_PUBLICA_BALANCEADOR/wordpress');" /var/www/html/wordpress/wp-config.php
+sed -i "/WP_SITEURL/a define('WP_HOME', 'http://$IP_PUBLICA_BALANCEADOR');" /var/www/html/wordpress/wp-config.php
 
 #Copiar el archivo wordpress /index.php a /var/www/html
 
@@ -60,10 +60,12 @@ sed -i "s#wp-blog-header.php#wordpress/wp-blog-header.php#" /var/www/html/index.
 a2enmod rewrite
 
 #Copiamos el archivo htaccess a /var/www/html
-mv /home/ubuntu/iaw-practica-8/FASE2/htaccess /var/www/html/.htaccess
+cd iaw-practica-8/FASE2
+mv /htaccess /var/www/html/.htaccess
 
 #Copiamos el archivo de configuración de Apache
-cp /home/ubuntu/iaw-practica-08/FASE2/000-default.conf /etc/apache2/sites-available
+cd iaw-practica-8/FASE2
+cp /000-default.conf /etc/apache2/sites-available
 
 #Reiniciamos Apache
 systemctl restart apache2 
@@ -82,7 +84,7 @@ sed -i "/NONCE_SALT/d" /var/www/html/wordpress/wp-config.php
 SECURITY_KEYS=$(curl https://api.wordpress.org/secret-key/1.1/salt/)
 
 #Reemplaza el carácter / por el carácter _
-SECURITY_KEYS=$(echo $SECURITY_KEY | tr / _)
+SECURITY_KEYS=$(echo $SECURITY_KEYS | tr / _)
 
 #Añadimos los security keys al archivo
 sed -i "/@-/a $SECURITY_KEYS" /var/www/html/wordpress/wp-config.php
