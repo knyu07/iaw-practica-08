@@ -93,7 +93,7 @@ sed -i "/@-/a $SECURITY_KEYS" /var/www/html/wordpress/wp-config.php
 rm -f /var/www/html/index.html
 
 #Instalamos el servicio de NFS server
-apt install nfs-kernel-server
+apt install nfs-kernel-server -y
 
 #Cambiamos el propietario y el grupo al directorio /var/www/html
 chown nobody:nogroup /var/www/html
