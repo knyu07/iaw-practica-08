@@ -99,7 +99,7 @@ apt install nfs-kernel-server -y
 chown nobody:nogroup /var/www/html
 
 #Configuramos el archivo /etc/exports
-echo "/var/www/html/" $IP_PRIVADA_FRONTEND_NFS_CLIENT(rw,sync,no_root_squash,no_subtree_check) /etc/exports
+echo "/var/www/html/" $IP_PRIVADA_FRONTEND_NFS_CLIENT(rw,sync,no_root_squash,no_subtree_check) 
 
 # Cambiamos el propietario y el grupo al directorio /var/www/html
 chown www-data:www-data /var/www/html/ -R
