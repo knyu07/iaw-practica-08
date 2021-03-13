@@ -49,7 +49,7 @@ sed -i "/WP_SITEURL/a define('WP_HOME', 'http://$IP_PUBLICA_BALANCEADOR');" /var
 
 #Copiar el archivo wordpress /index.php a /var/www/html
 
-cp /var/www/html/index.php /var/www/html
+cp /var/www/html/wordpress/index.php /var/www/html
 
 #Editamos el archivo wordpress /index.php
 
