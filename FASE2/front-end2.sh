@@ -61,11 +61,10 @@ a2enmod rewrite
 
 #Copiamos el archivo htaccess a /var/www/html
 cd iaw-practica-8/FASE2
-sudo cp htaccess /var/www/html/.htaccess
+cp htaccess /var/www/html/.htaccess
 
 #Copiamos el archivo de configuración de Apache
-cd iaw-practica-8/FASE2
-sudo cp 000-default.conf /etc/apache2/sites-available/000-default.conf
+cp 000-default.conf /etc/apache2/sites-available/000-default.conf
 
 #Reiniciamos Apache
 systemctl restart apache2 
