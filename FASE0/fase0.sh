@@ -63,7 +63,7 @@ cp /var/www/html/wordpress/index.php /var/www/html
 
 #Editamos el archivo wordpress /index.php
 
-sed -i "s#wp-blog-header.php#wordpress/wp-blog-header.php#" /var/www/html/index.php
+sed -i "s#wp-blog-header.php#/wordpress/wp-blog-header.php#" /var/www/html/index.php
 
 #Habilitamos el módulo mod_rewrite de Apache
 
