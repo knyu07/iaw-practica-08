@@ -73,7 +73,7 @@ a2enmod rewrite
 mv htaccess /var/www/html/.htaccess
 
 #Copiamos el archivo de configuración de Apache
-cp /home/ubuntu/iaw-practica-08/FASE0/000-default.conf /etc/apache2/sites-available
+cp 000-default.conf /etc/apache2/sites-available
 
 #Reiniciamos Apache
 systemctl restart apache2 
