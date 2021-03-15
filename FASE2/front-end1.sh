@@ -5,9 +5,9 @@ set -x
 DB_NAME=wordpress_db
 DB_USER=wordpress_user
 DB_PASSWORD=wordpress_password
-IP_PUBLICA_BALANCEADOR=
-IP_PRIVADA_MYSQL_SERVER=
-IP_PRIVADA_FRONTEND_NFS_CLIENT=
+IP_PUBLICA_BALANCEADOR=18.212.55.26
+IP_PRIVADA_MYSQL_SERVER=172.31.82.187
+IP_PRIVADA_FRONTEND_NFS_CLIENT=172.31.95.200
 
 #Actualizamos
 apt update
@@ -43,7 +43,8 @@ sed -i "s/username_here/$DB_USER/" wp-config.php
 sed -i "s/password_here/$DB_PASSWORD/" wp-config.php
 sed -i "s/localhost/$IP_PRIVADA_MYSQL_SERVER/" wp-config.php
 
-#Habilitamos las variables WP_SITEURL y WP_HOME
+#Habilitamos las variables WP_SITEURL y WP_HOME !! REVISAR
+
 sed -i "/DB_COLLATE/a define('WP_SITEURL', 'http://$IP_PUBLICA_BALANCEADOR/wordpress');" /var/www/html/wordpress/wp-config.php
 sed -i "/WP_SITEURL/a define('WP_HOME', 'http://$IP_PUBLICA_BALANCEADOR');" /var/www/html/wordpress/wp-config.php
 
@@ -52,10 +53,11 @@ sed -i "/WP_SITEURL/a define('WP_HOME', 'http://$IP_PUBLICA_BALANCEADOR');" /var
 cp /var/www/html/wordpress/index.php /var/www/html
 
 #Editamos el archivo wordpress /index.php
+# Se pone "#" porque ya hay un /
 
 sed -i "s#wp-blog-header.php#wordpress/wp-blog-header.php#" /var/www/html/index.php
 
-#Habilitamos el módulo mod_rewrite de Apache
+#Habilitamos el módulo mod_rewrite de Apache !! REVISAR
 
 a2enmod rewrite
 
@@ -69,7 +71,7 @@ cp 000-default.conf /etc/apache2/sites-available/000-default.conf
 #Reiniciamos Apache
 systemctl restart apache2 
 
-#Configuramos el archivo wp-config.php
+#Configuramos el archivo wp-config.php !! REVISAR d* (d=delete)
 sed -i "/AUTH_KEY/d" /var/www/html/wordpress/wp-config.php
 sed -i "/SECURE_AUTH_KEY/d" /var/www/html/wordpress/wp-config.php
 sed -i "/LOGGED_IN_KEY/d" /var/www/html/wordpress/wp-config.php
@@ -82,23 +84,23 @@ sed -i "/NONCE_SALT/d" /var/www/html/wordpress/wp-config.php
 #Hacemos una llamada a la API de wordpress para obtener las security keys
 SECURITY_KEYS=$(curl https://api.wordpress.org/secret-key/1.1/salt/)
 
-#Reemplaza el carácter / por el carácter _
+#Reemplaza el carácter / por el carácter _ !! REVISAR "/"
 SECURITY_KEYS=$(echo $SECURITY_KEYS | tr / _)
 
-#Añadimos los security keys al archivo
+#Añadimos los security keys al archivo !! REVISAR "/@/a"
 sed -i "/@-/a $SECURITY_KEYS" /var/www/html/wordpress/wp-config.php
 
 # Eliminamos el archivo index.html del /var/www/html
 rm -f /var/www/html/index.html
 
-#Instalamos el servicio de NFS server
+#Instalamos el servicio de NFS server (Comparten archivos entre front 1 y 2)
 apt install nfs-kernel-server -y
 
 #Cambiamos el propietario y el grupo al directorio /var/www/html
 chown nobody:nogroup /var/www/html
 
 #Configuramos el archivo /etc/exports
-echo "/var/www/html/ $IP_PRIVADA_FRONTEND_NFS_CLIENT(rw,sync,no_root_squash,no_subtree_check)" 
+echo "/var/www/html/ $IP_PRIVADA_FRONTEND_NFS_CLIENT(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports 
 
 # Cambiamos el propietario y el grupo al directorio /var/www/html
 chown www-data:www-data /var/www/html/ -R
